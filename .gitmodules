@@ -1,0 +1,12 @@
+[submodule "libpng"]
+	path = libpng
+	url = https://github.com/PizzaGameKit/libpng.git
+[submodule "freetype"]
+	path = freetype
+	url = https://github.com/PizzaGameKit/freetype.git
+[submodule "zlib"]
+	path = zlib
+	url = https://github.com/PizzaGameKit/zlib.git
+[submodule "msdf-atlas-gen"]
+	path = msdf-atlas-gen
+	url = https://github.com/PizzaGameKit/msdf-atlas-gen.git

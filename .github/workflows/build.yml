@@ -1,0 +1,45 @@
+name: Build msdf-atlas-gen for all systems
+
+on: workflow_dispatch
+
+jobs:
+  build:
+  
+    strategy:
+      matrix:
+        os: [windows-2022, windows-11-arm, ubuntu-22.04, ubuntu-22.04-arm, macos-15]
+    
+    runs-on: ${{ matrix.os }}
+    
+    env:
+        SCRIPT_NAME: ${{ fromJSON('{"windows-2022":"PowerShell ./build_windows.ps1 x64", "windows-11-arm":"PowerShell ./build_windows.ps1 arm64","ubuntu-22.04":"bash ./build_linux.sh x64","ubuntu-22.04-arm":"bash ./build_linux.sh arm64","macos-15":"bash ./build_macos.sh"}')[matrix.os] }}
+        SCRIPT_OS_NAME: ${{ fromJSON('{"windows-2022":"Windows x64","windows-11-arm":"Windows arm64","ubuntu-22.04":"Linux x64","ubuntu-22.04-arm":"Linux arm64","macos-15":"macOS"}')[matrix.os] }}
+        SCRIPT_OUTPUT: ${{ fromJSON('{"windows-2022":"binaries/win-x64","windows-11-arm":"binaries/win-arm64","ubuntu-22.04":"binaries/linux-x64","ubuntu-22.04-arm":"binaries/linux-arm64","macos-15":"binaries/osx"}')[matrix.os] }}
+        SCRIPT_LOGS: ${{ fromJSON('{"windows-2022":"logs/win-x64","windows-11-arm":"logs/win-arm64","ubuntu-22.04":"logs/linux-x64","ubuntu-22.04-arm":"logs/linux-arm64","macos-15":"logs/osx"}')[matrix.os] }}
+
+    name: Build ${{ matrix.configuration }} ${{ fromJSON('{"windows-2022":"Windows x64", "windows-11-arm":"Windows arm64","ubuntu-22.04":"Linux x64","ubuntu-22.04-arm":"Linux arm64","macos-15":"macOS arm64 + x64"}')[matrix.os] }}
+    
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+      
+    - name: Run script
+      run: ${{ env.SCRIPT_NAME }}
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.SCRIPT_OS_NAME }} binary
+        path: ${{ env.SCRIPT_OUTPUT }}
+        retention-days: 1
+        
+    - name: Upload logs artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.SCRIPT_OS_NAME }} logs
+        path: ${{ env.SCRIPT_LOGS }}
+        retention-days: 1
+          
