@@ -32,7 +32,7 @@ echo "Generate zlib"
 
 rm -r -f $zlibBuild
 
-cmake -S $zlibPath -B $zlibBuild -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" > "$logFolder/zlib.gen.log"
+cmake -S $zlibPath -B $zlibBuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" > "$logFolder/zlib.gen.log"
 
 echo -e "\tDone"
 
@@ -48,7 +48,7 @@ echo "Generate libpng"
 
 rm -r -f $libpngBuild
 
-cmake -S $libpngPath -B $libpngBuild -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DZLIB_LIBRARY="$zlibLib" -DZLIB_INCLUDE_DIR="$zlibPath" > "$logFolder/linpng.gen.log"
+cmake -S $libpngPath -B $libpngBuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DZLIB_LIBRARY="$zlibLib" -DZLIB_INCLUDE_DIR="$zlibPath" > "$logFolder/linpng.gen.log"
 
 echo -e "\tDone"
 
@@ -66,7 +66,7 @@ echo "Generate freetype"
 
 rm -r -f $freetypeBuild
 
-cmake -S ./freetype -B $freetypeBuild -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DFT_DISABLE_BZIP2=TRUE -DFT_DISABLE_BROTLI=TRUE -DBUILD_SHARED_LIBS=false -DZLIB_LIBRARY="$zlibLib" -DZLIB_INCLUDE_DIR="$zlibPath" -DPNG_LIBRARY="$libpngLib" -DPNG_PNG_INCLUDE_DIR="$libpngPath" > "$logFolder/freetype.gen.log"
+cmake -S ./freetype -B $freetypeBuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DFT_DISABLE_BZIP2=TRUE -DFT_DISABLE_BROTLI=TRUE -DBUILD_SHARED_LIBS=false -DZLIB_LIBRARY="$zlibLib" -DZLIB_INCLUDE_DIR="$zlibPath" -DPNG_LIBRARY="$libpngLib" -DPNG_PNG_INCLUDE_DIR="$libpngPath" > "$logFolder/freetype.gen.log"
 
 echo -e "\tDone"
 
@@ -82,7 +82,7 @@ echo "Generate msdf-atlas-gen"
 
 rm -r -f $msdfBuild
 
-cmake -S $msdfPath -B $msdfBuild -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DMSDF_ATLAS_USE_VCPKG=OFF -DMSDF_ATLAS_NO_ARTERY_FONT=OFF -DMSDF_ATLAS_USE_SKIA=OFF -DFREETYPE_LIBRARY="$freetypeLib" -DFREETYPE_INCLUDE_DIRS="$freetypePath/include/freetype;$freetypePath/include" -DZLIB_LIBRARY="$zlibLib" -DZLIB_INCLUDE_DIR="$zlibPath" -DPNG_LIBRARY="$libpngLib" -DPNG_PNG_INCLUDE_DIR="$libpngPath" > "$logFolder/msdf-atlas-gen.gen.log"
+cmake -S $msdfPath -B $msdfBuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET="10.15" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DMSDF_ATLAS_USE_VCPKG=OFF -DMSDF_ATLAS_NO_ARTERY_FONT=OFF -DMSDF_ATLAS_USE_SKIA=OFF -DFREETYPE_LIBRARY="$freetypeLib" -DFREETYPE_INCLUDE_DIRS="$freetypePath/include/freetype;$freetypePath/include" -DZLIB_LIBRARY="$zlibLib" -DZLIB_INCLUDE_DIR="$zlibPath" -DPNG_LIBRARY="$libpngLib" -DPNG_PNG_INCLUDE_DIR="$libpngPath" > "$logFolder/msdf-atlas-gen.gen.log"
 
 echo -e "\tDone"
 
