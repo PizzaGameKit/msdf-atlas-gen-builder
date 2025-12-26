@@ -59,7 +59,7 @@ Write-Host "Look for CMake support" -ForegroundColor DarkCyan
 		$cmake = vswhere -latest -find **\cmake.exe | select-object -first 1
 		if (!$cmake -Or !(Test-Path -Path $cmake))
 		{
-			Write-Host "`tCMake is not installed or not on PATH. Please add it to PATH or installed it from the Visual Studio components." -ForegroundColor DarkRed
+			Write-Host "`tCMake is not installed or not on PATH. Please add it to PATH or install it from the Visual Studio components." -ForegroundColor DarkRed
 			Read-Host -Prompt "Press Enter to exit"
 			Break
 		}

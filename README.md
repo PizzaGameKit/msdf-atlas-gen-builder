@@ -5,14 +5,14 @@ _This work is unofficial_. If you are new to **msdf-atlas-gen**, please refer to
 
 This repository is not meant to be an alternative release source, and therefore we will not propose pre-built binaries in the release section (and we made the build artifacts to expire almost instantly).
 
-The reason is that we do not wish to be an alternative source of binaries, and we want to encourage users to either build their own, or to download binaries only from official sources (for security reason, never trust alternative distributions).
+The reason is that we do not wish to be an alternative source of binaries, and we want to encourage users to either build their own, or to download binaries only from official sources (for security reason, never trust alternative distributions or .dll files downloaded from random websites).
 
 ## Why?
-This repository does a few things differently than the official distribution to better fit the specific needs of PizzaGameKit. Please understand that it might not fit yours, and that it doesn't aim to.
+This repository provides a build system and binaries for **[PizzaGameKit](https://github.com/PizzaGameKit)**. It mostly aims at being self-sufficient and having our own mirrors, without the need to fetch any online dependencies.
 
-It mainly generates binaries that are not officially distributed (e.g. mac and Linux), and builds them in a way so that dependencies are minimal (this repository can be built offline with no need of a package manager).
+No source change is made. Current target version is msdf-atlas-gen 1.3
 
-No source change is made. It's mostly about minor build system settings:
+There's a few build system differences to better fit the needs of **[PizzaGameKit](https://github.com/PizzaGameKit)**:
 
 - No online dependency or need for vcpkg;
 - No support for Artery font format export;
@@ -20,7 +20,7 @@ No source change is made. It's mostly about minor build system settings:
 - No support for WOFF2 fonts;
 - No support for pcf.bz2 fonts;
 - Freetype is built without Harfbuzz but that should be unconsequential to msdf-atlas-gen;
-- Link all dependencies statically (most notably the VC Runtime).
+- Link all dependencies statically (most notably the VC Runtime on Windows).
 
 This repository builds ```win-x64```, ```win-arm64```, ```linux-x64```, ```linux-arm64```, and ```osx``` (as Universal binaries containing both x64 and arm64).
 
@@ -43,11 +43,16 @@ For building Linux:
 
 For building macOS:
 
-- Any C++ build system;
+- Any C++ build system (preferably Xcode's);
 - CMake 3.15 (or newer).
 
 ## Licenses
 
-Each submodules abide to their own licenses. Be sure to check them out.
+Each submodules abide to their own licenses:
+
+- [freetype](https://github.com/PizzaGameKit/freetype/blob/master/LICENSE.TXT);
+- [libpng](https://github.com/PizzaGameKit/libpng/blob/libpng18/LICENSE.md);
+- [msdf-atlas-gen](https://github.com/PizzaGameKit/msdf-atlas-gen/blob/master/LICENSE.txt);
+- [zlib](https://github.com/PizzaGameKit/zlib/blob/develop/LICENSE);
 
 This very repository does nothing fancy and is just a collection of build scripts. You can consider those scripts as public domain.
